@@ -1,6 +1,9 @@
 const Discord = require("discord.js");
 require("dotenv").config();
 
+const express = require("express");
+const app = express();
+
 const client = new Discord.Client();
 
 var expression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
