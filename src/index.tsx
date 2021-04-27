@@ -17,7 +17,9 @@ client.on("message", (message) => {
   const command = args.shift().toLowerCase();
 
   // TODO SELECT CHANNEL
-  if (message.channel.name === "🖇links" || message.channel.name === "botzada") {
+  const regex = /\link/g;
+
+  if (message.channel.name.match(regex) || message.channel.name === "botzada") {
     console.table({
       "Author:": message.author.username,
       "Mensagem enviada:": message.content,
