@@ -7,6 +7,7 @@ const app = express();
 app.listen(process.env.PORT || 3000);
 
 const client = new Discord.Client();
+const prefix = "!";
 
 var expression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
 var regex = new RegExp(expression);
@@ -20,11 +21,23 @@ client.on("message", (message) => {
   const args = message.content.split(/ +/);
   const command = args.shift().toLowerCase();
 
+  // LIST ALL CHANNELS:
+  console.log(message.guild.channels.cache.map((i) => i.name));
+  console.log(
+    message.guild.channels.cache.map((i) =>
+      i.permissionOverwrites.map((p) => p)
+    )
+  );
+
+  if (command === `${prefix}servers`) {
+    return message.channel.send("Carregando listagem...");
+  }
+
   // TODO SELECT CHANNEL
   const regex = /\link/g;
   if (message.channel.name.match(regex) || message.channel.name === "botzada") {
     console.table({
-      "Author:": message.author.username,
+      "Author:": `${message.author.username}#${message.author.discriminator}`,
       "Mensagem enviada:": message.content,
     });
 
