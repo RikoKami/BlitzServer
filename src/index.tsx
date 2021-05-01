@@ -9,8 +9,8 @@ app.listen(process.env.PORT || 3000);
 const client = new Discord.Client();
 const prefix = "!";
 
-var expression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
-var regex = new RegExp(expression);
+const expression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gim;
+const regex = new RegExp(expression);
 
 client.once("ready", () => {
   console.log("\x1b[42m\x1b[30m", "Ready!", "\x1b[40m\x1b[37m");
@@ -34,8 +34,11 @@ client.on("message", (message) => {
   }
 
   // TODO SELECT CHANNEL
-  const regex = /\link/g;
-  if (message.channel.name.match(regex) || message.channel.name === "botzada") {
+  const channelRegex = /\link/g;
+  if (
+    message.channel.name.match(channelRegex) ||
+    message.channel.name === "botzada"
+  ) {
     console.table({
       "Author:": `${message.author.username}#${message.author.discriminator}`,
       "Mensagem enviada:": message.content,
