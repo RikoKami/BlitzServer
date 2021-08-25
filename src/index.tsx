@@ -36,7 +36,7 @@ client.on("message", async (message) => {
 
   if (expression.test(message.channel.name.match) || message.channel.name === "botzada") {
     console.table({
-      "Author:": message.author.username,
+      "Author:": `${message.author.username}#${message.author.discriminator}`,
       "Mensagem enviada:": message.content,
     });
 
